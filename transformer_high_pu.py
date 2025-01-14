@@ -17,9 +17,9 @@ pp.create_transformer_from_parameters(
     i0_percent=0.5,
 )
 pp.create_ext_grid(net, bus=0, vm_pu=1.0, va_degree=0.0)  # parametrize vm_pu
-pp.create_load(net, bus=1, p_mw=1.0, q_mvar=0.0)  # parametric p_mw, q_mvar
+pp.create_load(net, bus=1, p_mw=0.0, q_mvar=0.0)  # parametric p_mw, q_mvar
 
-pp.runpp(net, algorithm="nr", init="auto", init_vm_pu=[1.0, 1.5])  # parametrize init_vm_pu
+pp.runpp(net, algorithm="nr", init="auto", init_vm_pu=[1.0, 1.0])  # parametrize init_vm_pu
 
 print(net.res_bus)
 print(net.res_trafo)
