@@ -31,19 +31,19 @@ Experimental repo for Newton Raphson initial value problem
     ```
 3. Create a virtual environment using the `venv` module:
     ```sh
-    python3 -m venv venv
+    python3 -m venv .venv
     ```
 
 ### Activating the Virtual Environment
 
 #### Windows
 ```sh
-.\venv\Scripts\activate
+.\.venv\Scripts\activate
 ```
 
 #### macOS and Linux
 ```sh
-source venv/bin/activate
+source .venv/bin/activate
 ```
 
 ### Installing Packages
