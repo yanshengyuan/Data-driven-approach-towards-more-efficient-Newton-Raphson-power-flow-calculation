@@ -1,6 +1,6 @@
 import numpy as np
-from simple_net import HignGenInjectionNet, TrafoHighPuNet
 from complete_net import HighGenSegmentedNet, TrafoHighPuSegmentedNet
+from simple_net import HignGenInjectionNet, TrafoHighPuNet
 
 VM_PU_RANGE = [0.9, 3.0]  #
 P_MW_RANGE = [0.0, 1000.0]  #
