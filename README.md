@@ -66,10 +66,10 @@ This notebook demonstrates the implementation of a deep neural network (DNN) pip
 This repository includes four base network and functionality to generate training networks based on parameterization of key parameters.
 
 ### Data structure
-The data generation is handled by the `net_gen.py` script, which uses the definitions provided in `transformer_high_pu.py` and `high_generation_injection.py` to create networks with varying parameters.
+The data generation is handled by the `net_gen.py` script, which uses the definitions provided in `simple_net/transformer_high_pu.py`,  `simple_net/high_generation_injection.py` `complete_net/high_generation_segmented_grid.py` and `complete_net/transformer_high_pu_segmented_grid.py` to create networks with varying parameters.
 
 #### Base Networks
-1. **High Generation Injection Network (`simple_net/HignGenInjectionNet`)**
+1. **High Generation Injection Network (`HignGenInjectionNet`)**
    - This network simulates a high generation injection scenario.
    - It consists of:
      - A source bus at 10kV (node_0).
@@ -81,7 +81,7 @@ The data generation is handled by the `net_gen.py` script, which uses the defini
      - `q_mvar`: Reactive power generation.
      - `init_vm_pu`: Initial voltage magnitudes for the power flow calculation.
 
-2. **Transformer High PU Network (`simple_net/TrafoHighPuNet`)**
+2. **Transformer High PU Network (`TrafoHighPuNet`)**
    - This network simulates a transformer with high per-unit values.
    - It consists of:
      - Two buses at 10kV.
