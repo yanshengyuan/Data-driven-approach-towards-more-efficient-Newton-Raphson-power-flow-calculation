@@ -46,13 +46,13 @@ for segment, resistance, segment_gen in zip(range(n_segments), resistances, gens
     pp.create_sgen(net, bus=to_bus, p_mw=segment_gen, q_mvar=0.0)  # parametric p_mw, q_mvar
     from_bus = to_bus
 
-
+pp.create_sgen(net, bus=to_bus, p_mw=0.0, q_mvar=170.0)  # parametric p_mw, q_mvar
 pp.create_ext_grid(net, bus=0, vm_pu=1.0, va_degree=0.0)  # parametrize vm_pu
 
-for init_vm_pu in ["auto", 0.5, 1.0, 1.5, 2.0, 2.5]:
+for init_vm_pu in ["auto", 0.5, 1.0, 2.0, 3.0, 4.0]:
     try:
         pp.runpp(net, algorithm="nr", init_vm_pu=init_vm_pu, init_va_degree=0.0)  # wrong initial value, parametrize init_vm_pu
-        print(f"succeed with init_vm_pu={init_vm_pu}")
+        print(f"succeed with init_vm_pu={init_vm_pu}, result vm_pu bus 1: {net.res_bus.vm_pu.at[1]}")
     except LoadflowNotConverged as e:
         print(f"Wrong initial value for init_vm_pu={init_vm_pu}. Error:{e}")
 
