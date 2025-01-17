@@ -17,8 +17,10 @@ step=9
 step_fn = np.array([0.0] * step + [1.0] * (n_segments - step))
 
 # Grid params
-total_gen = 25.0 * 15.0
-gens = exp / exp.sum() * total_gen
+total_p_gen = 25.0 * 15.0 # parameterize total_p_gen
+total_q_gen = 0.0 # parameterize total_q_gen
+p_gens = exp / exp.sum() * total_p_gen
+q_gens = exp / exp.sum() * total_q_gen
 resistances = [1.0 / n_segments] * n_segments
 # resistances = step_fn / step_fn.sum() * 1.0
 
@@ -40,10 +42,10 @@ def create_pp_segment(net, from_bus, to_bus, resistance):
 net = pp.create_empty_network()
 pp.create_bus(net, vn_kv=10.0, index=0)
 from_bus = 0
-for segment, resistance, segment_gen in zip(range(n_segments), resistances, gens):
+for segment, resistance, segment_p_gen, segment_q_gen in zip(range(n_segments), resistances, p_gens, q_gens):
     to_bus = pp.create_bus(net, vn_kv=10.0)
     create_pp_segment(net, from_bus=from_bus, to_bus=to_bus, resistance=resistance)
-    pp.create_sgen(net, bus=to_bus, p_mw=segment_gen, q_mvar=0.0)  # parametric p_mw, q_mvar
+    pp.create_sgen(net, bus=to_bus, p_mw=segment_p_gen, q_mvar=segment_q_gen)
     from_bus = to_bus
 
 pp.create_sgen(net, bus=to_bus, p_mw=0.0, q_mvar=170.0)  # parametric p_mw, q_mvar
