@@ -7,8 +7,8 @@ from pandapower.powerflow import LoadflowNotConverged
 import numpy as np
 
 n_segments = 10
-total_gen = 25.0 * 15.0
 
+# Different functions to experiment
 exp = np.exp(np.linspace(0, 1, n_segments))
 exp_reversed = np.exp(np.linspace(0, 1, n_segments))[::-1]
 linear = np.linspace(0, 1, n_segments)
@@ -16,6 +16,8 @@ uniform = np.array([1.0] * n_segments)
 step=9
 step_fn = np.array([0.0] * step + [1.0] * (n_segments - step))
 
+# Grid params
+total_gen = 25.0 * 15.0
 gens = exp / exp.sum() * total_gen
 resistances = [1.0 / n_segments] * n_segments
 # resistances = step_fn / step_fn.sum() * 1.0
