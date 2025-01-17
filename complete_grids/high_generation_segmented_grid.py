@@ -1,0 +1,62 @@
+# source(10kV)-node_0-line(1 ohm)-node_1-load(25*-15 = -375MW)
+# node_0 = 10kV
+# node_1 = 25kV (should be the answer), node_1 = -15kV (V = 15kV, angle = 180 degrees)
+
+import pandapower as pp
+from pandapower.powerflow import LoadflowNotConverged
+import numpy as np
+
+n_segments = 10
+
+# Different functions to experiment
+exp = np.exp(np.linspace(0, 1, n_segments))
+exp_reversed = np.exp(np.linspace(0, 1, n_segments))[::-1]
+linear = np.linspace(0, 1, n_segments)
+uniform = np.array([1.0] * n_segments)
+step=9
+step_fn = np.array([0.0] * step + [1.0] * (n_segments - step))
+
+# Grid params
+total_p_gen = 25.0 * 15.0 # parameterize total_p_gen
+total_q_gen = 0.0 # parameterize total_q_gen
+p_gens = exp / exp.sum() * total_p_gen
+q_gens = exp / exp.sum() * total_q_gen
+resistances = [1.0 / n_segments] * n_segments
+# resistances = step_fn / step_fn.sum() * 1.0
+
+def create_pp_segment(net, from_bus, to_bus, resistance):
+    pp.create_line_from_parameters(
+        net,
+        from_bus=from_bus,
+        to_bus=to_bus,
+        length_km=1.0,
+        r_ohm_per_km=resistance,
+        x_ohm_per_km=0.00001,
+        c_nf_per_km=0.0,
+        g_us_per_km=0.0,
+        max_i_ka=100.0
+    )
+    return net
+
+
+net = pp.create_empty_network()
+pp.create_bus(net, vn_kv=10.0, index=0)
+from_bus = 0
+for segment, resistance, segment_p_gen, segment_q_gen in zip(range(n_segments), resistances, p_gens, q_gens):
+    to_bus = pp.create_bus(net, vn_kv=10.0)
+    create_pp_segment(net, from_bus=from_bus, to_bus=to_bus, resistance=resistance)
+    pp.create_sgen(net, bus=to_bus, p_mw=segment_p_gen, q_mvar=segment_q_gen)
+    from_bus = to_bus
+
+pp.create_sgen(net, bus=to_bus, p_mw=0.0, q_mvar=170.0)  # parametric p_mw, q_mvar
+pp.create_ext_grid(net, bus=0, vm_pu=1.0, va_degree=0.0)  # parametrize vm_pu
+
+for init_vm_pu in ["auto", 0.5, 1.0, 2.0, 3.0, 4.0]:
+    try:
+        pp.runpp(net, algorithm="nr", init_vm_pu=init_vm_pu, init_va_degree=0.0)  # wrong initial value, parametrize init_vm_pu
+        print(f"succeed with init_vm_pu={init_vm_pu}, result vm_pu bus 1: {net.res_bus.vm_pu.at[1]}")
+    except LoadflowNotConverged as e:
+        print(f"Wrong initial value for init_vm_pu={init_vm_pu}. Error:{e}")
+
+print("result vm_pu")
+print(net.res_bus)
