@@ -95,12 +95,33 @@ The data generation is handled by the `net_gen.py` script, which uses the defini
      - `vn_lv_kv`: Low voltage side nominal voltage of the transformer.
      - `init_vm_pu`: Initial voltage magnitudes for the power flow calculation.
 
-3. **Large Networks with High Generation Injection**
-    - W.I.P.
+3. **Large Networks with High Generation Injection (`HighGenSegmentedNet`)**
+   - This network simulates a high generation injection scenario with multiple segments.
+   - It consists of:
+     - A source bus at 10kV.
+     - Multiple segments with lines and distributed generation.
+     - An external grid connected to the first bus.
+   - Parameters:
+     - `vm_pu`: Voltage magnitude at the external grid bus.
+     - `total_p_gen`: Total active power generation distributed across segments.
+     - `total_q_gen`: Total reactive power generation distributed across segments.
+     - `p_mw`: Active power generation at the last bus.
+     - `q_mvar`: Reactive power generation at the last bus.
+     - `init_vm_pu`: Initial voltage magnitudes for the power flow calculation.
 
-4. **Large Networks with High PU Transformer**
-    - W.I.P.
-
+4. **Large Networks with High PU Transformer (`TrafoHighPuSegmentedNet`)**
+   - This network simulates a transformer with high per-unit values and multiple segments.
+   - It consists of:
+     - Two buses at 10kV.
+     - A transformer connecting the two buses.
+     - Multiple segments with lines and distributed generation.
+     - An external grid connected to the first bus.
+   - Parameters:
+     - `vm_pu`: Voltage magnitude at the external grid bus.
+     - `vn_lv_kv`: Low voltage side nominal voltage of the transformer.
+     - `total_p_gen`: Total active power generation distributed across segments.
+     - `total_q_gen`: Total reactive power generation distributed across segments.
+     - `init_vm_pu`: Initial voltage magnitudes for the power flow calculation.
 
 ### Data Generation
 The `net_gen.py` script provides functions to generate multiple instances of these networks with randomized parameters within specified ranges:
@@ -121,6 +142,27 @@ The `net_gen.py` script provides functions to generate multiple instances of the
     - `P_MW_RANGE = [0.0, 1000.0]`
     - `Q_MVAR_RANGE = [0.0, 0.5]`
     - `VN_LV_KV_RANGE = [0.9, 3.0]`
+    - `INIT_VM_PU_MIN = 0.9`
+    - `INIT_VM_PU_MAX = 3.0`
+
+- **`sample_net_high_gen_segmented_xl(N)`**:
+  - Generates `N` instances of `HighGenSegmentedNet` with randomized parameters.
+  - Parameter ranges:
+    - `VM_PU_RANGE = [0.9, 3.0]`
+    - `TOTAL_P_GEN_RANGE = [0.0, 1000.0]`
+    - `TOTAL_Q_GEN_RANGE = [0.0, 0.5]`
+    - `P_MW_RANGE = [0.0, 1000.0]`
+    - `Q_MVAR_RANGE = [0.0, 0.5]`
+    - `INIT_VM_PU_MIN = 0.9`
+    - `INIT_VM_PU_MAX = 3.0`
+
+- **`sample_net_trafo_high_pu_segmented_xl(N)`**:
+  - Generates `N` instances of `TrafoHighPuSegmentedNet` with randomized parameters.
+  - Parameter ranges:
+    - `VM_PU_RANGE = [0.9, 3.0]`
+    - `VN_LV_KV_RANGE = [0.9, 3.0]`
+    - `TOTAL_P_GEN_RANGE = [0.0, 1000.0]`
+    - `TOTAL_Q_GEN_RANGE = [0.0, 0.5]`
     - `INIT_VM_PU_MIN = 0.9`
     - `INIT_VM_PU_MAX = 3.0`
 
