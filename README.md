@@ -57,7 +57,7 @@ source .venv/bin/activate
 ## Included Notebooks
 
 ### pandapower_init_and_internals.ipynb
-This notebook provides an introduction to the `pandapower` library, including its initialization and internal workings. It is designed to help you understand the basics of power system modeling and analysis using `pandapower` in terms of accessing internal states and specify initial states. More detailed tutorial can be found via the [official website](https://www.pandapower.org/)
+This notebook provides an introduction to the `pandapower` library, including its initialization and internal workings. It is designed to help you understand the basics of power system modeling and analysis using `pandapower` in terms of accessing internal states and specify initial states. More detailed tutorial can be found via the [official website](https://www.pandapower.org/).
 
 ### pipeline_dnn.ipynb
 This notebook demonstrates the implementation of a deep neural network (DNN) pipeline. It includes data preprocessing, model training, and evaluation steps. It is intended to guide you through the process of building and deploying a DNN model in the context of `pandapower` for your project.
@@ -69,7 +69,7 @@ This repository includes four base network and functionality to generate trainin
 The data generation is handled by the `net_gen.py` script, which uses the definitions provided in `simple_net/transformer_high_pu.py`,  `simple_net/high_generation_injection.py` `complete_net/high_generation_segmented_grid.py` and `complete_net/transformer_high_pu_segmented_grid.py` to create networks with varying parameters.
 
 #### Base Networks
-1. **High Generation Injection Network (`HignGenInjectionNet`)**
+1. **High Generation Injection Network (`HighGenInjectionNet`)**
    - This network simulates a high generation injection scenario.
    - It consists of:
      - A source bus at 10kV (node_0).
@@ -127,7 +127,7 @@ The data generation is handled by the `net_gen.py` script, which uses the defini
 The `net_gen.py` script provides functions to generate multiple instances of these networks with randomized parameters within specified ranges:
 
 - **`sample_net_high_gen_inj_xs(N)`**:
-  - Generates `N` instances of `HignGenInjectionNet` with randomized parameters.
+  - Generates `N` instances of `HighGenInjectionNet` with randomized parameters.
   - Parameter ranges:
     - `VM_PU_RANGE = [0.9, 3.0]`
     - `P_MW_RANGE = [0.0, 1000.0]`
@@ -167,3 +167,11 @@ The `net_gen.py` script provides functions to generate multiple instances of the
     - `INIT_VM_PU_MAX = 3.0`
 
 These functions return lists of network instances that can be used for training or analysis purposes.
+
+You can call these functions and classes like the fllowing:
+```python
+from data import HighGenInjectionNet, sample_net_high_gen_inj_xs
+
+nets = sample_net_high_gen_inj_xs(2)
+nets[0].run_power_flow
+
