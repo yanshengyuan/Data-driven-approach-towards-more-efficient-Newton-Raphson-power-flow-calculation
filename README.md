@@ -57,10 +57,10 @@ source .venv/bin/activate
 ## Included Notebooks
 
 ### pandapower_init_and_internals.ipynb
-This notebook provides an introduction to the `pandapower` library, including its initialization and internal workings. It is designed to help you understand the basics of power system modeling and analysis using `pandapower`.
+This notebook provides an introduction to the `pandapower` library, including its initialization and internal workings. It is designed to help you understand the basics of power system modeling and analysis using `pandapower` in terms of accessing internal states and specify initial states. More detailed tutorial can be found via the [official website](https://www.pandapower.org/)
 
 ### pipeline_dnn.ipynb
-This notebook demonstrates the implementation of a deep neural network (DNN) pipeline. It includes data preprocessing, model training, and evaluation steps. It is intended to guide you through the process of building and deploying a DNN model for your project.
+This notebook demonstrates the implementation of a deep neural network (DNN) pipeline. It includes data preprocessing, model training, and evaluation steps. It is intended to guide you through the process of building and deploying a DNN model in the context of `pandapower` for your project.
 
 ## Data
 This repository includes four base network and functionality to generate training networks based on parameterization of key parameters.
@@ -114,7 +114,7 @@ The data generation is handled by the `net_gen.py` script, which uses the defini
    - It consists of:
      - Two buses at 10kV.
      - A transformer connecting the two buses.
-     - Multiple segments with lines and distributed generation.
+     - Multiple segments with lines, 10kv bus, and distributed generation.
      - An external grid connected to the first bus.
    - Parameters:
      - `vm_pu`: Voltage magnitude at the external grid bus.
