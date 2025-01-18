@@ -8,7 +8,7 @@ import pandapower as pp
 from pandapower.powerflow import LoadflowNotConverged
 
 
-class HignGenInjectionNet:
+class HighGenInjectionNet:
     def __init__(self, vm_pu, p_mw, q_mvar, init_vm_pu):
         self.vm_pu = vm_pu
         self.p_mw = p_mw
@@ -50,7 +50,7 @@ class HignGenInjectionNet:
 
 if __name__ == "__main__":
     # value range arbitrary
-    net_gen = HignGenInjectionNet(vm_pu=1.0, p_mw=25.0 * 15.0, q_mvar=0.0, init_vm_pu=[1.0, 1.0])
+    net_gen = HighGenInjectionNet(vm_pu=1.0, p_mw=25.0 * 15.0, q_mvar=0.0, init_vm_pu=[1.0, 1.0])
     net_gen.run_power_flow()
     net_gen.run_power_flow(init_vm_pu=[1.0, 2.5])
 
@@ -60,6 +60,6 @@ if __name__ == "__main__":
         q_mvar = np.random.uniform(0.0, 0.5)
         init_vm_pu = [np.random.uniform(0.9, 3.0), np.random.uniform(0.9, 3.0)]
 
-        net_instance = HignGenInjectionNet(vm_pu, p_mw, q_mvar, init_vm_pu)
+        net_instance = HighGenInjectionNet(vm_pu, p_mw, q_mvar, init_vm_pu)
         print(f"Run {_+1}:")
         net_instance.run_power_flow([1.0, 2.5])

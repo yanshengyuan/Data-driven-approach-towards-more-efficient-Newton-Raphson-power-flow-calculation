@@ -1,6 +1,15 @@
 import numpy as np
-from complete_net import HighGenSegmentedNet, TrafoHighPuSegmentedNet
-from simple_net import HignGenInjectionNet, TrafoHighPuNet
+
+if __name__ == "__main__" and __package__ is None:
+    import sys
+    from os import path
+
+    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    from complete_net import HighGenSegmentedNet, TrafoHighPuSegmentedNet
+    from simple_net import HighGenInjectionNet, TrafoHighPuNet
+else:
+    from .complete_net import HighGenSegmentedNet, TrafoHighPuSegmentedNet
+    from .simple_net import HighGenInjectionNet, TrafoHighPuNet
 
 VM_PU_RANGE = [0.9, 3.0]  #
 P_MW_RANGE = [0.0, 1000.0]  #
@@ -23,7 +32,7 @@ def sample_net_high_gen_inj_xs(N):
             np.random.uniform(INIT_VM_PU_MIN, INIT_VM_PU_MAX),
         ]
 
-        net_instance = HignGenInjectionNet(vm_pu, p_mw, q_mvar, init_vm_pu)
+        net_instance = HighGenInjectionNet(vm_pu, p_mw, q_mvar, init_vm_pu)
         nets.append(net_instance)
 
     return nets
