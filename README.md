@@ -173,5 +173,5 @@ You can call these functions and classes like the fllowing:
 from data import HighGenInjectionNet, sample_net_high_gen_inj_xs
 
 nets = sample_net_high_gen_inj_xs(2)
-nets[0].run_power_flow
+nets[0].run_power_flow()
 
