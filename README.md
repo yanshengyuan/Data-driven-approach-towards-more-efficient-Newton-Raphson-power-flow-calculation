@@ -168,7 +168,7 @@ The `net_gen.py` script provides functions to generate multiple instances of the
 
 These functions return lists of network instances that can be used for training or analysis purposes.
 
-You can call these functions and classes like the fllowing:
+You can call these functions and classes like the following:
 ```python
 from data import HighGenInjectionNet, sample_net_high_gen_inj_xs
 
