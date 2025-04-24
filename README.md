@@ -1,6 +1,12 @@
 # ICT with Industry Workshop
 Experimental repo for Newton Raphson initial value problem
 
+# Our pre-print paper for this research: "Data driven approach towards more efficient Newton-Raphson power flow calculation for distribution grids"
+1. DOI: https://doi.org/10.48550/arXiv.2504.11650
+2. Reference (cited as):
+
+   [1] S. Yan, F. Vazinram, Z. Kaseb, L. Spoor, J. Stiasny, B. Mamudi, A. H. Ardakani, U. Orji, P. P. Vergara, Y. Xiang, and J. Guo, “Data driven approach towards more efficient Newton-Raphson power flow calculation for distribution grids,” arXiv preprint arXiv:2504.11650, 2025.
+
 ## Getting Started
 
 ### Installation of Python
@@ -168,7 +174,7 @@ The `net_gen.py` script provides functions to generate multiple instances of the
 
 These functions return lists of network instances that can be used for training or analysis purposes.
 
-You can call these functions and classes like the following:
+You can call these functions and classes like the fllowing:
 ```python
 from data import HighGenInjectionNet, sample_net_high_gen_inj_xs
 
